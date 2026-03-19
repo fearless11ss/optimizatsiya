@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-
-const AppContext = createContext(null);
+import React, { createContext, useContext } from 'react';
+import { makeAutoObservable } from 'mobx';
 
 const defaultEmployees = [
   {
@@ -25,13 +24,17 @@ const defaultClients = [
   { id: '3', name: 'Ольга Козлова', phone: '+7 999 333-44-55' },
 ];
 
-export function AppProvider({ children }) {
-  const [employees, setEmployees] = useState(defaultEmployees);
-  const [clients, setClients] = useState(defaultClients);
-  const [appointments, setAppointments] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
+class AppStore {
+  employees = defaultEmployees;
+  clients = defaultClients;
+  appointments = [];
+  currentUser = null;
 
-  const registerEmployee = useCallback((name, login, password, services) => {
+  constructor() {
+    makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  registerEmployee(name, login, password, services) {
     const newEmployee = {
       id: String(Date.now()),
       name,
@@ -39,38 +42,38 @@ export function AppProvider({ children }) {
       password,
       services: Array.isArray(services) ? services : [],
     };
-    setEmployees((prev) => [...prev, newEmployee]);
-    setCurrentUser(newEmployee);
+    this.employees = [...this.employees, newEmployee];
+    this.currentUser = newEmployee;
     return { success: true, employee: newEmployee };
-  }, []);
+  }
 
-  const loginEmployee = useCallback((login, password) => {
+  loginEmployee(login, password) {
     const loginNorm = login.trim().toLowerCase();
-    const employee = employees.find(
+    const employee = this.employees.find(
       (e) => e.login === loginNorm && e.password === password
     );
     if (employee) {
-      setCurrentUser(employee);
+      this.currentUser = employee;
       return { success: true, employee };
     }
     return { success: false };
-  }, [employees]);
+  }
 
-  const logout = useCallback(() => {
-    setCurrentUser(null);
-  }, []);
+  logout() {
+    this.currentUser = null;
+  }
 
-  const addClient = useCallback((name, phone) => {
+  addClient(name, phone) {
     const newClient = {
       id: String(Date.now()),
       name: name.trim(),
       phone: (phone || '').trim(),
     };
-    setClients((prev) => [...prev, newClient]);
+    this.clients = [...this.clients, newClient];
     return newClient;
-  }, []);
+  }
 
-  const addAppointment = useCallback((employeeId, clientId, serviceIds, dateTime) => {
+  addAppointment(employeeId, clientId, serviceIds, dateTime) {
     const newAppointment = {
       id: String(Date.now()),
       employeeId,
@@ -79,38 +82,28 @@ export function AppProvider({ children }) {
       dateTime,
       createdAt: new Date().toISOString(),
     };
-    setAppointments((prev) => [...prev, newAppointment]);
+    this.appointments = [...this.appointments, newAppointment];
     return newAppointment;
-  }, []);
+  }
 
-  const getAppointmentsByEmployee = useCallback(
-    (employeeId) =>
-      appointments.filter((a) => a.employeeId === employeeId),
-    [appointments]
-  );
+  getAppointmentsByEmployee(employeeId) {
+    return this.appointments.filter((a) => a.employeeId === employeeId);
+  }
+}
 
-  const value = {
-    employees,
-    clients,
-    appointments,
-    currentUser,
-    registerEmployee,
-    loginEmployee,
-    logout,
-    addClient,
-    addAppointment,
-    getAppointmentsByEmployee,
-  };
+const AppContext = createContext(null);
+const appStore = new AppStore();
 
+export function AppProvider({ children }) {
   return (
-    <AppContext.Provider value={value}>
+    <AppContext.Provider value={appStore}>
       {children}
     </AppContext.Provider>
   );
 }
 
-export function useApp() {
+export function useStore() {
   const ctx = useContext(AppContext);
-  if (!ctx) throw new Error('useApp must be used within AppProvider');
+  if (!ctx) throw new Error('useStore must be used within AppProvider');
   return ctx;
 }

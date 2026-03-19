@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../context/AppContext';
 import './AppointmentsPage.css';
 
 function formatDateTime(dateTimeStr) {
@@ -15,9 +16,9 @@ function formatDateTime(dateTimeStr) {
   });
 }
 
-export default function AppointmentsPage() {
+function AppointmentsPage() {
   const navigate = useNavigate();
-  const { currentUser, clients, getAppointmentsByEmployee, logout } = useApp();
+  const { currentUser, clients, getAppointmentsByEmployee, logout } = useStore();
   const myAppointments = getAppointmentsByEmployee(currentUser?.id) || [];
 
   const getClientName = (clientId) => {
@@ -74,3 +75,5 @@ export default function AppointmentsPage() {
     </div>
   );
 }
+
+export default observer(AppointmentsPage);

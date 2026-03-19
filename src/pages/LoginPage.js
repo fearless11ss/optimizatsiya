@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../context/AppContext';
 import './LoginPage.css';
 
 const SERVICE_OPTIONS = ['Стрижка', 'Окрашивание', 'Укладка', 'Маникюр', 'Педикюр'];
 
-export default function LoginPage() {
+function LoginPage() {
   const navigate = useNavigate();
-  const { loginEmployee, registerEmployee } = useApp();
+  const { loginEmployee, registerEmployee } = useStore();
   const [mode, setMode] = useState('login'); // 'login' | 'register'
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -127,3 +128,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+export default observer(LoginPage);

@@ -1,19 +1,20 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useApp } from './context/AppContext';
+import { observer } from 'mobx-react-lite';
+import { useStore } from './context/AppContext';
 import LoginPage from './pages/LoginPage';
 import AppointmentsPage from './pages/AppointmentsPage';
 import CreateAppointmentPage from './pages/CreateAppointmentPage';
 
-function PrivateRoute({ children }) {
-  const { currentUser } = useApp();
+const PrivateRoute = observer(function PrivateRoute({ children }) {
+  const { currentUser } = useStore();
   if (!currentUser) {
     return <Navigate to="/" replace />;
   }
   return children;
-}
+});
 
-function App() {
+const App = observer(function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
@@ -36,6 +37,6 @@ function App() {
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-}
+});
 
 export default App;

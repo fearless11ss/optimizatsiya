@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../context/AppContext';
 import './CreateAppointmentPage.css';
 
-export default function CreateAppointmentPage() {
+function CreateAppointmentPage() {
   const navigate = useNavigate();
-  const { currentUser, clients, addAppointment } = useApp();
+  const { currentUser, clients, addAppointment } = useStore();
   const [clientId, setClientId] = useState('');
   const [serviceIds, setServiceIds] = useState([]);
   const [date, setDate] = useState('');
@@ -119,3 +120,5 @@ export default function CreateAppointmentPage() {
     </div>
   );
 }
+
+export default observer(CreateAppointmentPage);
