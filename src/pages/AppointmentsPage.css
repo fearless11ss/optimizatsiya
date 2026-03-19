@@ -1,0 +1,100 @@
+.appointments-page {
+  min-height: 100vh;
+  padding: 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.appointments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.appointments-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+  color: #2c2c2c;
+}
+
+.appointments-header .master-name {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.btn-logout {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.btn-logout:hover {
+  border-color: #8b6914;
+  color: #8b6914;
+}
+
+.appointments-actions {
+  margin-bottom: 24px;
+}
+
+.btn-new {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #8b6914;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btn-new:hover {
+  background: #7a5d12;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 48px 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.appointment-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  border-left: 4px solid #8b6914;
+}
+
+.card-client {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2c2c2c;
+  margin-bottom: 6px;
+}
+
+.card-services {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.card-datetime {
+  color: #666;
+  font-size: 0.9rem;
+}

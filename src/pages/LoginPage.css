@@ -1,0 +1,130 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d5 100%);
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card h1 {
+  margin: 0 0 4px;
+  font-size: 1.75rem;
+  color: #2c2c2c;
+}
+
+.login-subtitle {
+  margin: 0 0 24px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.login-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.login-tabs button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  color: #666;
+  font-size: 0.95rem;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.login-tabs button.active {
+  color: #8b6914;
+  border-bottom-color: #8b6914;
+  font-weight: 500;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.login-form label .label-text {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #8b6914;
+}
+
+.services-block {
+  margin-bottom: 16px;
+}
+
+.services-block .label-text {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.services-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 8px;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+}
+
+.checkbox-label input {
+  margin: 0;
+}
+
+.form-error {
+  color: #c00;
+  font-size: 0.9rem;
+  margin: 0 0 12px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #8b6914;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: #7a5d12;
+}
